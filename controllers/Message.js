@@ -16,12 +16,12 @@ const AddMessageToQueue = WrapHandler(async (req, res) => {
   const body = req?.body;
   const val = validateRequest(body, ["message", "name", "metadata"]);
   if (val) return res.status(400).send(val);
-  if (body.message.length > 16) {
-    return res.status(400).send({ message: "message longer than 16" });
-  }
-  if (body.name.length > 16) {
-    return res.status(400).send({ message: "message longer than 16" });
-  }
+//   if (body.message.length > 16) {
+//     return res.status(400).send({ message: "message longer than 16" });
+//   }
+//   if (body.name.length > 16) {
+//     return res.status(400).send({ message: "message longer than 16" });
+//   }
   body.messageID = generateID();
   // save to db
   const create = await MessageModel.create(body);
