@@ -64,6 +64,14 @@ const GetSingleMessageController = WrapHandler(async (req, res) => {
   const messages = await GetMessages();
   //   console.log(queueIndex)
   //   console.log(queueIndex, messages.length)
+  if(messages.length === 0) {
+    return {
+        message: "test",
+        name: "test",
+        queueIndex: 0,
+        messageID: "test",
+      }
+  }
   if (queueIndex >= messages.length || queueIndex < 0) {
     queueIndex = 0;
   }
@@ -88,6 +96,14 @@ const GetViewMessageController = WrapHandler(async (req, res) => {
     queueIndex = 0;
   }
   const message = messages[queueIndex];
+  if(messages.length === 0) {
+    return {
+        message: "test",
+        name: "test",
+        queueIndex: 0,
+        messageID: "test",
+      }
+  }
   // save the last index sent
   const mess = {
     message: message.message,
@@ -122,6 +138,7 @@ const UpdateQueueController = WrapHandler(async (req, res) => {
   await saveQueue(appID, queueIndex);
   const messages = await GetMessages();
   //   console.log(queueIndex)
+
   console.log(queueIndex, messages.length);
   if (queueIndex >= messages.length || queueIndex < 0) {
     return res.status(400).send({ message: "You cannot update to this index" });
